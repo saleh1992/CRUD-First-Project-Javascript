@@ -35,6 +35,7 @@
             align-items: flex-start;
             margin: auto;
             padding: 30px;
+            position: relative;
         }
 
         p {
@@ -75,17 +76,20 @@
         }
 
         #massge {
+            width: 100%;
             font-size: 17px;
             color: red;
             font-weight: bolder;
             text-align: center;
-            position: relative;
-            bottom: 486px;
+            position: absolute;
+            top: 15%;
+            left: 50%;
+            transform: translate(-50%,-50%);
         }
 
         @media (max-width:450px) {
             #massge {
-                bottom: 501px;
+                /* bottom: 501px; */
             }
         }
 
