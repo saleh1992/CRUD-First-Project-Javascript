@@ -169,7 +169,10 @@
         let genderValue;
         let updateCount = 0;
 
-
+        // Call localStorage login to make verification
+        if (!localStorage.getItem("isLogin")) {
+            window.open("index.html", "_self")
+        }
 
 
         // Get SessionStorge 
