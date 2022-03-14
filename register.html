@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+</head>
+
+<body>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #146082;
+        }
+
+        .data {
+            width: 33%;
+            padding: 15px;
+            border-radius: 9px;
+            margin: 10px;
+            outline: none;
+            border: none;
+        }
+
+        table {
+            margin-top: 50px;
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        tr,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th {
+            padding: 0 5px 0 5px;
+        }
+
+        h1 {
+            width: 100%;
+            font-size: 29px;
+            font-family: sans-serif;
+        }
+
+        .backColor,
+        .fontColor {
+            margin: auto;
+            padding: 13px;
+        }
+
+        .color,
+        .colorFo {
+            padding: 0;
+            border-radius: initial;
+        }
+
+        #page {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            margin: auto;
+            flex-direction: column;
+            margin-bottom: 50px;
+        }
+
+        #trHead {
+            background: #2196f3;
+            color: white;
+            height: 29px;
+        }
+
+        .colorInput {
+            width: 100%;
+        }
+
+        .gnd {
+            display: flex;
+            min-width: 300px;
+            align-items: center;
+            justify-content: center;
+            align-content: center;
+            justify-content: space-between;
+            width: 22%;
+        }
+
+        #massege {
+            color: red;
+        }
+
+        #adminP {
+            font-size: 32px;
+            font-weight: 600;
+            font-family: sans-serif;
+            color: #ff5722;
+            margin: 32px 0 -1px;
+        }
+    </style>
+
+    <body id="body">
+        <div id="page">
+            <p id="adminP">Register Admin</p>
+            <h1>Please Fill Below Form</h1>
+            <p id="massege"></p>
+            <input class="data" id="name" type="text" placeholder="First Name">
+            <input class="data" id="lname" type="text" placeholder="Last Name">
+            <input class="data" id="username" type="text" placeholder="Username">
+            <input class="data" id="password" type="password" placeholder="Password">
+            <input class="data" id="cpassword" type="password" placeholder="Confirm Password">
+            <input class="data" id="email" type="mail" placeholder="Mail">
+            <div class="gnd">
+                <h3>Gender :</h3>
+                <label for="male">Male</label><input id="male" name="gender" type="radio" value="Male"
+                    placeholder="gender">
+                <label for="female">Female</label><input id="female" name="gender" type="radio" value="Female">
+            </div>
+            <div>
+                <h3>Country</h3>
+                <input type="list" id="country" list="list">
+                <datalist id="list">
+                    <option value="Egypt"></option>
+                    <option value="China"></option>
+                    <option value="Canada"></option>
+                    <option value="India"></option>
+                    <option value="Japan"></option>
+                    <option value="United States of America"></option>
+                    <option value="United Kingdom"></option>
+                    <option value="United Arab Emirates"></option>
+            </div>
+            <div class="colorInput">
+                <div class="backColor">
+                    <span>Choose background Color</span> <input class="color" type="color" value="#ffffff">
+                </div>
+                <div class="fontColor">
+                    <span>Choose Font Color</span> <input class="colorFo" type="color">
+                </div>
+                <button id="btn">Register</button>
+            </div>
+        </div>
+
+    </body>
+
+    <script>
+        let name = document.getElementById('name');
+        let lname = document.getElementById('lname');
+        let username = document.getElementById('username');
+        let password = document.getElementById('password');
+        let cpassword = document.getElementById('cpassword');
+        let email = document.getElementById('email');
+        let gender = document.getElementsByName("gender")
+        let country = document.getElementById('country');
+        let color = document.querySelector(".color");
+        let colorFo = document.querySelector(".colorFo");
+        let male = document.getElementById("male")
+        let input = document.getElementsByTagName("input");
+        let inputArray = Array.from(document.getElementsByTagName("input"));
+        let genderValue;
+        let users = [];
+        let hasCounter = 0;
+        let orderCounter = 0;
+
+
+        btn.addEventListener("click", () => {
+            hasCounter++;
+            orderCounter++;
+            gender.forEach((gen) => {
+                if (gen.checked) {
+                    genderValue = gen.value
+                }
+            })
+            let user = [
+                hasCounter,
+                orderCounter,
+                name.value,
+                lname.value,
+                username.value,
+                password.value,
+                cpassword.value,
+                email.value,
+                genderValue,
+                country.value,
+                "<button class='btnEdit'>Edit</button>",
+                "<button class='btnRemove'>Remove</button>"
+            ]
+            // get old users and store it in usres var
+            users = JSON.parse(localStorage.getItem("users"))
+            // update users old users + form user -->> form input
+            if (users == null) {
+                users = [user]
+            } else {
+                users.push(user)
+            }
+            localStorage.setItem("users", JSON.stringify(users))
+            name.value = ""
+            lname.value = ""
+            username.value = ""
+            password.value = ""
+            cpassword.value = ""
+            email.value = ""
+            country.value = ""
+            window.open("users.html")
+        })
+
+    </script>
+
+</html>

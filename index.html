@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #05212a;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .continer {
+            background-color: #ffffff;
+            width: 308px;
+            margin: 15% auto;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width:450px) {
+            .continer {
+                margin: 50% auto;
+            }
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            width: 350px;
+            align-items: flex-start;
+            margin: auto;
+            padding: 30px;
+        }
+
+        p {
+            color: #191919;
+            font-size: 32px;
+            margin: 0;
+            font-family: sans-serif;
+            font-weight: 700;
+        }
+
+        input[type="text"] {
+            margin: 11px 0;
+            padding: 5px;
+            width: 230px;
+            outline: none
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border: 2px solid #00bcd4;
+        }
+
+        input[type="password"] {
+            padding: 5px;
+            width: 230px;
+            outline: none
+        }
+
+        #login {
+            padding: 10px;
+            width: 244px;
+            cursor: pointer;
+            margin-top: 10px;
+            color: #ffffff;
+            background-color: #0aa8c2;
+            border: none;
+            font-family: sans-serif;
+        }
+
+        #massge {
+            font-size: 17px;
+            color: red;
+            font-weight: bolder;
+            text-align: center;
+            position: relative;
+            bottom: 486px;
+        }
+
+        @media (max-width:450px) {
+            #massge {
+                bottom: 501px;
+            }
+        }
+
+        #signIn {
+            padding: 10px;
+            width: 244px;
+            cursor: pointer;
+            margin-top: 10px;
+            color: #191919;
+            border: none;
+            font-family: sans-serif;
+        }
+    </style>
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="continer">
+        <div class="content">
+            <p>Log in</p>
+            <input type="text" placeholder="Username">
+            <input type="password" placeholder="Password">
+            <input type="button" id="login" value="Log in">
+            <input type="button" id="signIn" value="Sign in">
+        </div>
+    </div>
+    <p id="massge"></p>
+
+    <script>
+        let userInput = document.querySelector("[type='text']")
+        let passInput = document.querySelector("[type='password']")
+
+        // get old users and store it in usres var
+        let users = JSON.parse(localStorage.getItem("users"))
+
+        let userVerification = false
+        let passVerification = false
+        let userLoopValue = 0
+        let passLoopValue = 0
+
+        login.addEventListener("click", () => {
+            users.forEach(useE => {
+                if (useE[4] == userInput.value) {
+                    userLoopValue = useE[4]
+                }
+                if (useE[5] == passInput.value) {
+                    passLoopValue = useE[5]
+                }
+            });
+
+            if (passLoopValue === passInput.value) {
+                passVerification = true
+                console.log(1);
+            }
+            if (userLoopValue === userInput.value) {
+                userVerification = true
+                console.log(2);
+            }
+
+            if (userVerification == false) {
+                userInput.focus()
+                userInput.style.border = "1px solid red"
+                massge.innerHTML = `Please Enter Correct ${userInput.placeholder}`
+                console.log(3);
+                return false
+            } else {
+                massge.innerHTML = ""
+                userInput.style.border = "1px solid"
+                passInput.focus()
+            }
+
+            if (passVerification == false) {
+                passInput.focus()
+                passInput.style.border = "1px solid red"
+                massge.innerHTML = `Please Enter Correct ${passInput.placeholder}`
+                console.log(4);
+            } else {
+                massge.innerHTML = ""
+                passInput.style.border = "1px solid"
+                console.log(5);
+            }
+            console.log(userVerification);
+            console.log(passVerification);
+            if (userVerification == true && passVerification == true) {
+                console.log("Login Sucess");
+                localStorage.setItem("isLogin", "true")
+                localStorage.setItem("welcomeName", userLoopValue)
+                window.open("welcomePage.html", "_self")
+            }
+
+
+        })
+
+        signIn.addEventListener("click", () => {
+            window.open("registerNewUser.html", "_blank")
+        })
+
+
+
+    </script>
+</body>
+
+</html>

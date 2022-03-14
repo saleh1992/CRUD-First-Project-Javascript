@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #05212a;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .page {
+            text-align: center;
+        }
+
+        h2 {
+            color: white;
+            font-size: 50px;
+            margin-top: 150px;
+            text-transform: capitalize;
+        }
+
+        input {
+            padding: 10px;
+            width: 244px;
+            cursor: pointer;
+            margin-top: 10px;
+            color: #ffffff;
+            background-color: #0aa8c2;
+            border: none;
+            font-family: sans-serif;
+        }
+    </style>
+    <title>Welcome Page</title>
+</head>
+
+<body>
+    <div class="page">
+        <h2>Welcome</h2>
+
+        <input type="button" id="dataUsers" value="Data Users">
+        <input type="button"id="register" value="Register New Users">
+        <input type="button" id="logOut" value="Log out">
+    </div>
+
+    <script>
+        let heading = document.querySelector("h2")
+        let name = localStorage.getItem("welcomeName")
+
+        heading.innerHTML += ` ${name}`
+        // Call localStorage login to make verification
+        if (!localStorage.getItem("isLogin")) {
+            window.open("index.html", "_self")
+        }
+
+        logOut.addEventListener("click", () => {
+            window.open("index.html", "_self")
+            localStorage.removeItem("isLogin")
+        })
+        dataUsers.addEventListener("click", () => {
+            window.open("users.html", "_blank")
+        })
+        register.addEventListener("click", () => {
+            window.open("register.html", "_blank")
+        })
+
+    </script>
+</body>
+
+</html>
