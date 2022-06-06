@@ -5,98 +5,98 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #c9c9c952;
+        }
+
+        .data {
+            width: 33%;
+            padding: 15px;
+            border-radius: 9px;
+            margin: 10px;
+            outline: none;
+            border: none;
+        }
+
+        table {
+            margin-top: 50px;
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        tr,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th {
+            padding: 0 5px 0 5px;
+        }
+
+        h1 {
+            width: 100%;
+        }
+
+        .backColor,
+        .fontColor {
+            margin: auto;
+            padding: 13px;
+        }
+
+        .color,
+        .colorFo {
+            padding: 0;
+            border-radius: initial;
+        }
+
+        #page {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            margin: auto;
+            flex-direction: column;
+            margin-bottom: 50px;
+        }
+
+        #trHead {
+            background: #2196f3;
+            color: white;
+            height: 29px;
+        }
+
+        .colorInput {
+            width: 100%;
+        }
+
+        .gnd {
+            display: flex;
+            min-width: 300px;
+            align-items: center;
+            justify-content: center;
+            align-content: center;
+            justify-content: space-between;
+            width: 22%;
+        }
+
+        #massege {
+            color: red;
+        }
+    </style>
     <title>Users</title>
 </head>
-<style>
-    body {
-        margin: 0;
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-color: #c9c9c952;
-    }
-
-    .data {
-        width: 33%;
-        padding: 15px;
-        border-radius: 9px;
-        margin: 10px;
-        outline: none;
-        border: none;
-    }
-
-    table {
-        margin-top: 50px;
-        border: 1px solid black;
-        border-collapse: collapse;
-        text-align: center;
-        margin-bottom: 30px;
-    }
-
-    tr,
-    th,
-    td {
-        border: 1px solid black;
-    }
-
-    th {
-        padding: 0 5px 0 5px;
-    }
-
-    h1 {
-        width: 100%;
-    }
-
-    .backColor,
-    .fontColor {
-        margin: auto;
-        padding: 13px;
-    }
-
-    .color,
-    .colorFo {
-        padding: 0;
-        border-radius: initial;
-    }
-
-    #page {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        width: 100%;
-        margin: auto;
-        flex-direction: column;
-        margin-bottom: 50px;
-    }
-
-    #trHead {
-        background: #2196f3;
-        color: white;
-        height: 29px;
-    }
-
-    .colorInput {
-        width: 100%;
-    }
-
-    .gnd {
-        display: flex;
-        min-width: 300px;
-        align-items: center;
-        justify-content: center;
-        align-content: center;
-        justify-content: space-between;
-        width: 22%;
-    }
-
-    #massege {
-        color: red;
-    }
-</style>
 
 <body>
     <table id="table">
@@ -160,13 +160,20 @@
         // Detete data from table from localStorage and htmal page
         let btnRemove = Array.from(document.querySelectorAll(".btnRemove"))
         let tr = Array.from(document.querySelectorAll("tr"))
-        // let td = Array.from(document.querySelectorAll("td"))
+        let inde = 0
+        userGetremov = JSON.parse(localStorage.getItem("users"));
+        userGetremov.forEach((usRemove) => {
+            console.log(userGetremov.indexOf(usRemove));
+            // console.log(usRemove);
+        });
         btnRemove.forEach(remove => {
             remove.addEventListener("click", () => {
+                console.log(btnRemove.indexOf(remove) + "btnRemove");
+                console.log(userGetremov);
                 userGet.splice(btnRemove.indexOf(remove), 1)
                 remove.parentElement.parentElement.remove()
                 localStorage.setItem("users", JSON.stringify(userGet))
-                window.location.reload(false)
+                // window.location.reload(false)
                 // update Hash number after delete
                 let tdata1 = Array.from(document.querySelectorAll(".tdata1"));
                 tdata1.forEach((td1) => {
@@ -189,7 +196,7 @@
                 editArray = userGet[btnEdit.indexOf(btnEd)]
                 sessionStorage.setItem("editeIndexNum", btnEdit.indexOf(btnEd))
                 sessionStorage.setItem("edite", JSON.stringify(editArray))
-                window.open("update.html","_blank")
+                window.open("update.html", "_blank")
             })
         })
 
